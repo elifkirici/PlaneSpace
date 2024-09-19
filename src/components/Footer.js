@@ -23,7 +23,7 @@ function Footer() {
 
                     { /* menu item start */}
                     <div>
-                        <ul className="font-medium flex gap-10 text-dark-text">
+                        <ul className="font-medium flex gap-10 text-dark-text justify-center mt-5">
                             <li className="mb-4">
                                 <a href="/" className="hover:shadow-sm duration-500 text-sm hover:text-base">Deals</a>
                             </li>
@@ -37,7 +37,7 @@ function Footer() {
 
                 <hr className="my-6 border-t-[0.5px] border-gray-300 mx-auto" />
                 <div className="sm:flex items-center justify-center w-full">
-                    <span className="text-sm font-thin text-light-text text-center">© 2024 <a href="/" className=" hover:underline">Plane Space</a>. All Rights Reserved.
+                    <span className="text-sm font-thin text-dark-text text-center">© 2024 <a href="/" className=" hover:underline">Plane Space</a>. All Rights Reserved.
                     </span>
                 </div>
 

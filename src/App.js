@@ -7,8 +7,7 @@ function App() {
     <div className="App">
 
       <Layout >
-        <div className="w-full  px-5 py-8">
-
+        <div className="w-full px-5 py-8">
           <FlightListItem />
         </div>
       </Layout>
