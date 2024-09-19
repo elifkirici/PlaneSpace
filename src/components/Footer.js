@@ -5,7 +5,7 @@ function Footer() {
     return (
 
         //Footer start
-        <footer className="fixed bottom-0 w-full">
+        <footer className="relative bottom-0 w-full">
             <div className="mx-auto w-full px-5 py-8">
                 <div className="md:flex md:justify-between">
                     { /* logo start */}
