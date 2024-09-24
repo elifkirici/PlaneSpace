@@ -2,11 +2,36 @@ import React, { useState } from "react";
 import plane from "../../assets/planeDark.svg";
 import planeLanding from "../../assets/plane-landing.svg";
 import planeTakeoff from "../../assets/plane-takeoff.svg";
-
 import { ACTIVE_FLIGHT_TYPE } from "./FlightBooking.constants";
+function FlightBooking({ FlightData, setFilteredFlights, filteredFlights }) {
+  const [departureCity, setDepartureCity] = useState("");
+  const [arrivalCity, setArrivalCity] = useState("");
+  const [selectedDepartureDate, setSelectedDepartureDate] = useState("");
+  const [selectedReturnDate, setselectedReturnDate] = useState("");
+  const [flightTypeActive, setFlightTypeActive] = useState(
+    ACTIVE_FLIGHT_TYPE.ROUND_TRIP
+  );
 
-function FlightBooking() {
-  const [flightTypeActive, setFlightTypeActive] = useState("round-trip");
+  // Function to convert Date to 'yyyy-mm-dd' format only
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Aylar 0'dan başlıyor
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  //Search button function
+  const handleSearch = () => {
+    const filtered = FlightData.filter((flight) => {
+      return (
+        flight.departure.city.toLowerCase() === departureCity.toLowerCase() &&
+        flight.arrival.city.toLowerCase() === arrivalCity.toLowerCase() &&
+        formatDate(flight.departure.departureTime) === selectedDepartureDate
+      );
+    });
+    setFilteredFlights(filtered);
+  };
 
   return (
     //FlightBooking start
@@ -55,6 +80,8 @@ function FlightBooking() {
             <div className="relative">
               <input
                 type="text"
+                value={departureCity}
+                onChange={(e) => setDepartureCity(e.target.value)}
                 className="outline-light-text border-[1.5px] border-light-text border-opacity-50 rounded-tl-2xl rounded-bl-2xl w-56 px-10 py-1"
               />
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center  pointer-events-none">
@@ -68,6 +95,8 @@ function FlightBooking() {
             <div className="relative">
               <input
                 type="text"
+                value={arrivalCity}
+                onChange={(e) => setArrivalCity(e.target.value)}
                 className="outline-light-text border-[1.5px] border-light-text border-opacity-50 rounded-tr-2xl rounded-br-2xl w-56 px-10 py-1"
               />
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -82,11 +111,15 @@ function FlightBooking() {
           <div className="flex gap-0.5">
             <input
               type="date"
+              value={selectedDepartureDate}
+              onChange={(e) => setSelectedDepartureDate(e.target.value)}
               className="outline-light-text border-[1.5px] border-light-text border-opacity-50 rounded-tl-2xl rounded-bl-2xl w-56 px-5 py-1"
             />
             {flightTypeActive === ACTIVE_FLIGHT_TYPE.ROUND_TRIP ? (
               <input
                 type="date"
+                value={selectedReturnDate}
+                onChange={(e) => setselectedReturnDate(e.target.value)}
                 className="outline-light-text border-[1.5px] border-light-text border-opacity-50 rounded-tr-2xl rounded-br-2xl w-56 px-5 py-1"
               />
             ) : (
@@ -106,7 +139,10 @@ function FlightBooking() {
 
         {/* flight-submit-btn start */}
         <div className="flight-submit-btn">
-          <button className="bg-dark-purple text-white font-semibold py-2 px-5 rounded-lg">
+          <button
+            onClick={handleSearch}
+            className="bg-dark-purple text-white font-semibold py-2 px-5 rounded-lg"
+          >
             Show Flights
           </button>
         </div>

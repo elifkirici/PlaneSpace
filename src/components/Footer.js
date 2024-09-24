@@ -4,7 +4,7 @@ function Footer() {
   return (
     //Footer start
     <footer className="container relative bottom-0 w-full">
-      <div className=" w-full px-5 py-8">
+      <div className="w-full py-8">
         <div className="md:flex md:justify-between">
           {/* logo start */}
           <div className="flex items-center gap-2 group">

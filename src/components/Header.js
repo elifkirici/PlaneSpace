@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import deals from "../assets/deals-icon.svg";
 import discover from "../assets/discover-icon.svg";
@@ -8,6 +9,7 @@ import hamburger from "../assets/hamburger.svg";
 function Header() {
   const [isClickedMobileMenu, setIsClickedMobileMenu] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isProfileDrapdownOpen, SetIsProfileDrapdownOpen] = useState(false);
 
   // choose the screen size
   const handleResize = () => {
@@ -33,7 +35,7 @@ function Header() {
             {/* logo start */}
             {!isClickedMobileMenu && (
               <div className="flex items-center gap-2 group">
-                <a href="/">
+                <Link to="/">
                   <div className="w-7 h-7 bg-dark-purple rounded-full relative shadow-md duration-700 group-hover:w-24 group-hover:rounded-l-lg">
                     <img
                       src={logo}
@@ -41,10 +43,12 @@ function Header() {
                       alt="Logo"
                     />
                   </div>
-                </a>
-                <h1 className="uppercase text-dark-text font-bold ">
-                  plane space
-                </h1>
+                </Link>
+                <Link to={"/"}>
+                  <h1 className="uppercase text-dark-text font-bold ">
+                    plane space
+                  </h1>
+                </Link>
               </div>
             )}
             {/* logo end */}
@@ -83,15 +87,32 @@ function Header() {
                   Discover
                 </a>
               </li>
-              <li className="flex items-center gap-1">
+            </ul>
+            <div className="relative inline-block">
+              <div
+                onClick={() => SetIsProfileDrapdownOpen(!isProfileDrapdownOpen)}
+                className="flex justify-between items-center mx-1 gap-2 text-dark-text text-sm font-medium cursor-pointer"
+              >
                 <img
                   src={profile}
                   alt="profile"
                   className="w-9 h-9 object-cover rounded-full"
                 />
-                <a href="/">Joane Smith</a>
-              </li>
-            </ul>
+                <p>Joane Smith</p>
+              </div>
+
+              {/* Dropdown options */}
+              {isProfileDrapdownOpen && (
+                <div className="absolute z-50 mt-1 w-full bg-white rounded-lg text-justify shadow-lg py-4">
+                  <Link
+                    to={"Flights"}
+                    className="px-4 py-2 cursor-pointer hover:bg-light-btn inline-flex w-full"
+                  >
+                    My Flights
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
           {/* menu item end */}
 
@@ -130,14 +151,34 @@ function Header() {
                   <img src={discover} alt="discover" />
                   <a href="/">Discover</a>
                 </li>
-                <li className="flex items-center gap-1">
-                  <img
-                    src={profile}
-                    alt="profile"
-                    className="w-9 h-9 object-cover rounded-full"
-                  />
-                  <a href="/">Joane Smith</a>
-                </li>
+
+                <div className="relative inline-block">
+                  <div
+                    onClick={() =>
+                      SetIsProfileDrapdownOpen(!isProfileDrapdownOpen)
+                    }
+                    className="flex justify-between items-center bg-white rounded-lg p-2 text-dark-text text-sm font-medium cursor-pointer"
+                  >
+                    <img
+                      src={profile}
+                      alt="profile"
+                      className="w-9 h-9 object-cover rounded-full"
+                    />
+                    <p>Joane Smith</p>
+                  </div>
+
+                  {/* Dropdown options */}
+                  {isProfileDrapdownOpen && (
+                    <div className="absolute mt-1 w-full bg-white rounded-lg text-justify shadow-lg">
+                      <Link
+                        to={"Flights"}
+                        className="px-4 py-2 cursor-pointer hover:bg-light-btn inline-flex w-full"
+                      >
+                        My Flights
+                      </Link>
+                    </div>
+                  )}
+                </div>
               </ul>
             </div>
           )}
