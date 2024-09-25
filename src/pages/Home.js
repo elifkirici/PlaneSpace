@@ -289,7 +289,7 @@ function Home({ bookedFlight, setBookedFlight }) {
     }
 
     setFilteredFlights(sortedFlights);
-  }, [selectedSortByOption]);
+  }, [selectedSortByOption, filteredFlights]);
 
   return (
     <div className="App">
