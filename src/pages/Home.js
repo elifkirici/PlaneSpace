@@ -11,7 +11,6 @@ import travelIcon from "../assets/travel-icon.svg";
 import RadioWrapperItem from "../components/RadioWrapperItem";
 import UpFill from "../assets/up-fill.svg";
 import DownFill from "../assets/down-fill.svg";
-
 function Home({ bookedFlight, setBookedFlight }) {
   const ServiceCardItem = [
     {
@@ -289,7 +288,7 @@ function Home({ bookedFlight, setBookedFlight }) {
     }
 
     setFilteredFlights(sortedFlights);
-  }, [selectedSortByOption, filteredFlights]);
+  }, [selectedSortByOption]);
 
   return (
     <div className="App">

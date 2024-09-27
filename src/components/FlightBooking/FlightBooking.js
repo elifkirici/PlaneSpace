@@ -109,19 +109,23 @@ function FlightBooking({ FlightData, setFilteredFlights, filteredFlights }) {
             </div>
           </div>
           <div className="flex gap-0.5">
-            <input
-              type="date"
-              value={selectedDepartureDate}
-              onChange={(e) => setSelectedDepartureDate(e.target.value)}
-              className="outline-light-text border-[1.5px] border-light-text border-opacity-50 rounded-tl-2xl rounded-bl-2xl w-56 px-5 py-1"
-            />
-            {flightTypeActive === ACTIVE_FLIGHT_TYPE.ROUND_TRIP ? (
+            <div class="custom-date-input relative inline-block">
               <input
                 type="date"
-                value={selectedReturnDate}
-                onChange={(e) => setselectedReturnDate(e.target.value)}
-                className="outline-light-text border-[1.5px] border-light-text border-opacity-50 rounded-tr-2xl rounded-br-2xl w-56 px-5 py-1"
+                value={selectedDepartureDate}
+                onChange={(e) => setSelectedDepartureDate(e.target.value)}
+                className="outline-light-text border-[1.5px] border-light-text border-opacity-50 rounded-tl-2xl rounded-bl-2xl w-56 px-5 py-1"
               />
+            </div>
+            {flightTypeActive === ACTIVE_FLIGHT_TYPE.ROUND_TRIP ? (
+              <div class="custom-date-input relative inline-block">
+                <input
+                  type="date"
+                  value={selectedReturnDate}
+                  onChange={(e) => setselectedReturnDate(e.target.value)}
+                  className="outline-light-text border-[1.5px] border-light-text border-opacity-50 rounded-tr-2xl rounded-br-2xl w-56 px-5 py-1"
+                />
+              </div>
             ) : (
               <button
                 type="date"
