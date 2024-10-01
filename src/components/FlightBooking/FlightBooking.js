@@ -3,7 +3,8 @@ import plane from "../../assets/planeDark.svg";
 import planeLanding from "../../assets/plane-landing.svg";
 import planeTakeoff from "../../assets/plane-takeoff.svg";
 import { ACTIVE_FLIGHT_TYPE } from "./FlightBooking.constants";
-function FlightBooking({ FlightData, setFilteredFlights, filteredFlights }) {
+
+function FlightBooking({ FlightData, setFilteredFlights }) {
   const [departureCity, setDepartureCity] = useState("");
   const [arrivalCity, setArrivalCity] = useState("");
   const [selectedDepartureDate, setSelectedDepartureDate] = useState("");
@@ -16,7 +17,7 @@ function FlightBooking({ FlightData, setFilteredFlights, filteredFlights }) {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Aylar 0'dan başlıyor
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const day = date.getDate().toString().padStart(2, "0");
     return `${year}-${month}-${day}`;
   };

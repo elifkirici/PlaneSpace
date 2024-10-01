@@ -11,7 +11,14 @@ import travelIcon from "../assets/travel-icon.svg";
 import RadioWrapperItem from "../components/RadioWrapperItem";
 import UpFill from "../assets/up-fill.svg";
 import DownFill from "../assets/down-fill.svg";
-function Home({ bookedFlight, setBookedFlight }) {
+
+function Home({ setBookedFlight }) {
+  const storedData = JSON.parse(localStorage.getItem("filteredFlights")) || [];
+  const [filteredFlights, setFilteredFlights] = useState(storedData);
+  const ArrivalTimeOptions = ["5:00 AM - 11:59 AM", "12:00 PM - 5:59 PM"];
+  const [isSortByDrapdownOpen, SetIsSortByDrapdownOpen] = useState(false);
+  const [selectedSortByOption, setSelectedSortByOption] = useState("");
+
   const ServiceCardItem = [
     {
       image: rentCar,
@@ -29,10 +36,6 @@ function Home({ bookedFlight, setBookedFlight }) {
       icons: travelIcon,
     },
   ];
-  const ArrivalTimeOptions = ["5:00 AM - 11:59 AM", "12:00 PM - 5:59 PM"];
-  const [isSortByDrapdownOpen, SetIsSortByDrapdownOpen] = useState(false);
-  const [selectedSortByOption, setSelectedSortByOption] = useState("");
-  const [filteredFlights, setFilteredFlights] = useState([]);
 
   const FlightData = [
     {
@@ -289,7 +292,9 @@ function Home({ bookedFlight, setBookedFlight }) {
 
     setFilteredFlights(sortedFlights);
   }, [selectedSortByOption]);
-
+  useEffect(() => {
+    localStorage.setItem("filteredFlights", JSON.stringify(filteredFlights));
+  }, [filteredFlights]);
   return (
     <div className="App">
       <div className="w-full container mx-auto">
@@ -303,7 +308,7 @@ function Home({ bookedFlight, setBookedFlight }) {
             />
             <div className="flex flex-col md:flex-row">
               <div className="flex flex-col w-full gap-8">
-                {filteredFlights.length > 0 ? (
+                {filteredFlights && filteredFlights.length > 0 ? (
                   filteredFlights.map((item, i) => (
                     <FlightListItem
                       item={item}

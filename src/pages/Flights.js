@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import MyFlightsItem from "../components/MyFlightsItem";
 import info from "../assets/info.svg";
+
 function Flights({ bookedFlight, setBookedFlight }) {
   const [isSortingDrapdownOpen, SetIsSortingDrapdownOpen] = useState(false);
   const SortByOptions = ["Recommended", "New To Old", "Old To New"];
